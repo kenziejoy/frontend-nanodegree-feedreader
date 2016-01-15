@@ -2,6 +2,24 @@ Intro section
 
 This was a project of the Udacity Front End Development Nanodegree. The purpose was to create a suite of tests for a feedreader application using Jasmine.js.
 
+RSS Feeds:
+* are defined
+* feed URLs defined
+* feed URLs are not empty
+* feed URLs are valid URLs
+* feed names defined
+* feed names are not empty
+
+The Menu:
+* menu is hidden by default
+* menu hides and appears the menu icon is clicked
+
+Initial Entries:
+* there is at least one feed
+
+New Feed Selection:
+* the content changes when a new feed is loaded
+
 Author: MacKenzie Rawcliffe
 Date: January 2016
 
@@ -27,7 +45,7 @@ No installation neccessary
 
 ## Demo
 
-You can view the [demo site here]().
+You can view the [demo site here](http://kenziejoy.github.io/frontend-nanodegree-feedreader).
 
 **[Back to top](#table-of-contents)**
 
