@@ -55,9 +55,9 @@ $(function() {
 		var entries;
 		
 		//let the loadFeed function run
-		beforeEach(function(done)) {
+		beforeEach(function(done) {
 			loadFeed(0,done);
-		};
+		});
 		
 		// At least one entry
 		it('should have at least one entry', function(done) {
