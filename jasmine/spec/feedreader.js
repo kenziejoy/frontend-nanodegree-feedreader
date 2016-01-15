@@ -1,6 +1,7 @@
 // feedreader.js
 
 $(function() {
+	
 	// RSS Feeds Suite
 	describe('RSS Feeds', function() {
 		
@@ -23,10 +24,11 @@ $(function() {
 		it('should have a name', function() {
 			for(var i = 0; i < allFeeds.length; i++) {
 			//allFeeds.forEach(function(index) {
-				expect(allFeeds.name).toBeDefined();
-				expect(allFeeds.name.length).not.toBe(0);
+				expect(allFeeds[i].name).toBeDefined();
+				expect(allFeeds[i].name.length).not.toBe(0);
 			};
 		});
+		
 	});
 
 	// Menu Suite
@@ -96,4 +98,5 @@ $(function() {
 			loadFeed(0,done);
 		});
 	});
+	
 }());
