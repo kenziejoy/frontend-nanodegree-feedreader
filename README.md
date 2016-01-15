@@ -33,13 +33,11 @@ Date: January 2016
 
 It is a website so you can proceed to the [demo](#demo) to implement.
 
+Or you can run the app by opening index.html in the browser
+
 ### Dependencies
 
 1. Jasmine.js
-
-### Installation
-
-No installation neccessary
 
 **[Back to top](#table-of-contents)**
 
