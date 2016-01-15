@@ -1,72 +1,96 @@
-/* feedreader.js
- *
- * This is the spec file that Jasmine will read and contains
- * all of the tests that will be run against your application.
- */
+// feedreader.js
 
-/* We're placing all of our tests within the $() function,
- * since some of these tests may require DOM elements. We want
- * to ensure they don't run until the DOM is ready.
- */
 $(function() {
-    /* This is our first test suite - a test suite just contains
-    * a related set of tests. This suite is all about the RSS
-    * feeds definitions, the allFeeds variable in our application.
-    */
-    describe('RSS Feeds', function() {
-        /* This is our first test - it tests to make sure that the
-         * allFeeds variable has been defined and that it is not
-         * empty. Experiment with this before you get started on
-         * the rest of this project. What happens when you change
-         * allFeeds in app.js to be an empty array and refresh the
-         * page?
-         */
-        it('are defined', function() {
-            expect(allFeeds).toBeDefined();
-            expect(allFeeds.length).not.toBe(0);
-        });
+	// RSS Feeds Suite
+	describe('RSS Feeds', function() {
+		
+		// Check for a feed
+		it('are defined', function() {
+			expect(allFeeds).toBeDefined();
+			expect(allFeeds.length).not.toBe(0);
+		});
+		
+		// Check for a url
+		it('should contain a URL', function() {
+			allFeeds.forEach(function(value) {
+				expect(allFeeds.url).toBeDefined();
+				expect(allFeeds.url.length).not.toBe(0);
+				/* using Spoon Library regex for testing url validity - https://mathiasbynens.be/demo/url-regex*/
+				expect(allFeeds.url).toMatch(/(((http|ftp|https):\/{2})+(([0-9a-z_-]+\.)+(aero|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|ac|ad|ae|af|ag|ai|al|am|an|ao|aq|ar|as|at|au|aw|ax|az|ba|bb|bd|be|bf|bg|bh|bi|bj|bm|bn|bo|br|bs|bt|bv|bw|by|bz|ca|cc|cd|cf|cg|ch|ci|ck|cl|cm|cn|co|cr|cu|cv|cx|cy|cz|cz|de|dj|dk|dm|do|dz|ec|ee|eg|er|es|et|eu|fi|fj|fk|fm|fo|fr|ga|gb|gd|ge|gf|gg|gh|gi|gl|gm|gn|gp|gq|gr|gs|gt|gu|gw|gy|hk|hm|hn|hr|ht|hu|id|ie|il|im|in|io|iq|ir|is|it|je|jm|jo|jp|ke|kg|kh|ki|km|kn|kp|kr|kw|ky|kz|la|lb|lc|li|lk|lr|ls|lt|lu|lv|ly|ma|mc|md|me|mg|mh|mk|ml|mn|mn|mo|mp|mr|ms|mt|mu|mv|mw|mx|my|mz|na|nc|ne|nf|ng|ni|nl|no|np|nr|nu|nz|nom|pa|pe|pf|pg|ph|pk|pl|pm|pn|pr|ps|pt|pw|py|qa|re|ra|rs|ru|rw|sa|sb|sc|sd|se|sg|sh|si|sj|sj|sk|sl|sm|sn|so|sr|st|su|sv|sy|sz|tc|td|tf|tg|th|tj|tk|tl|tm|tn|to|tp|tr|tt|tv|tw|tz|ua|ug|uk|us|uy|uz|va|vc|ve|vg|vi|vn|vu|wf|ws|ye|yt|yu|za|zm|zw|arpa)(:[0-9]+)?((\/([~0-9a-zA-Z\#\+\%@\.\/_-]+))?(\?[0-9a-zA-Z\+\%@\/&\[\];=_-]+)?)?))\b/imuS);
+			});
+		});
+		
+		// Check for a name
+		it('should have a name', function() {
+			allFeeds.forEach(function(value) {
+				expect(allFeeds.name).toBeDefined();
+				expect(allFeeds.name.length).not.toBe(0);
+			});
+		});
+	});
 
+	// Menu Suite
+	describe('The Menu', function() {
+		
+		var menuHidden = $('body').hasClass('menu-hidden');
+		var menuItem = $('.menu-icon-link');
+		
+		// Is the menu hidden by default?
+		it('should be hidden by default', function() {
+			expect(menuHidden).toBe(true);
+		});
 
-        /* TODO: Write a test that loops through each feed
-         * in the allFeeds object and ensures it has a URL defined
-         * and that the URL is not empty.
-         */
+		// Does the menu slide on click?
+		it('should become visible when icon clicked', function() {
+			menuItem.click();
+			expect($('body').hasClass('menu-hidden')).toBe(false);
+			menuItem.click();
+			expect($('body').hasClass('menu-hidden')).toBe(true);
+		});
+	});
+		
+	// Entries
+	describe('Initial entries', function() {
+		
+		var entries;
+		
+		//let the loadFeed function run
+		beforeEach(function(done) {
+			loadFeed(0,done);
+		});
+		
+		// At least one entry
+		it('should have at least one entry', function(done) {
+			entries = $('.feed').find('.entry').length;
+			expect(entries).toBeGreaterThan(0);
+			done();
+		});
+	});
 
-
-        /* TODO: Write a test that loops through each feed
-         * in the allFeeds object and ensures it has a name defined
-         * and that the name is not empty.
-         */
-    });
-
-
-    /* TODO: Write a new test suite named "The menu" */
-
-        /* TODO: Write a test that ensures the menu element is
-         * hidden by default. You'll have to analyze the HTML and
-         * the CSS to determine how we're performing the
-         * hiding/showing of the menu element.
-         */
-
-         /* TODO: Write a test that ensures the menu changes
-          * visibility when the menu icon is clicked. This test
-          * should have two expectations: does the menu display when
-          * clicked and does it hide when clicked again.
-          */
-
-    /* TODO: Write a new test suite named "Initial Entries" */
-
-        /* TODO: Write a test that ensures when the loadFeed
-         * function is called and completes its work, there is at least
-         * a single .entry element within the .feed container.
-         * Remember, loadFeed() is asynchronous so this test wil require
-         * the use of Jasmine's beforeEach and asynchronous done() function.
-         */
-
-    /* TODO: Write a new test suite named "New Feed Selection"
-
-        /* TODO: Write a test that ensures when a new feed is loaded
-         * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
-         */
+	// Feed Selection
+	describe('New feed selection', function() {
+		
+		var firstFeed,
+			secondFeed;
+		
+		
+		beforeEach(function(done) {
+			//first feed text
+			firstFeed = $('.entry')[0].innerText;
+			//load second feed
+			loadFeed(1,done);
+		});
+		
+		it('content changes when user loads a new feed', function(done) {
+			//second feed text
+			secondFeed = $('.entry')[0].innerText;
+			expect(firstFeed).not.toBe(secondFeed);
+			done();
+		});
+		
+		//reload first feed
+		afterEach(function(done) {
+			loadFeed(0,done);
+		});
+	});
 }());
